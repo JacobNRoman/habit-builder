@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+    <script type="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"/>
+</head>
+<body>
+<header th:fragment="header">
+    <h1>The Habit-Builder</h1>
+    <h3 th:text="${title}"></h3>
+    <nav>
+        <a href="/login">Login</a> |
+        <a href="/logout">Logout</a> |
+        <a href="/">Tasks</a> |
+        <a href="/progress">Progress</a>
+    </nav>
+</header>
+
+</body>
+</html>
