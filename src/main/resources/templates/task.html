@@ -10,7 +10,7 @@
 <form th:if="!${taskSession}" th:action="'/task/' + ${task.id}" method="post">
     <button type="submit">Start Working!</button>
 </form>
-<form th:if="${taskSession}" th:action="'/task/' + ${task.id}" method="post">
+<form th:if="${taskSession}" th:action="'/task/' + ${task.id} + '/' + ${taskSession.id}" method="post">
     <button type="submit">Stop Working!</button>
 </form>
 

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -23,6 +24,19 @@ public class TaskSession {
     private Task task;
 
     public TaskSession(){}
+
+    public void startClock(Task task){
+        LocalDateTime now = LocalDateTime.now();
+        this.setStart(now.toLocalTime());
+        this.setDate(now.toLocalDate());
+        this.setTask(task);
+    }
+
+    public void stopClock(){
+        LocalDateTime now = LocalDateTime.now();
+        this.setStop(now.toLocalTime());
+        this.setLength(Duration.between(this.getStart(), this.getStop()));
+    }
 
     public int getId() {
         return id;

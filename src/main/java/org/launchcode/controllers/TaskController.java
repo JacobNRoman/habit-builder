@@ -65,15 +65,26 @@ public class TaskController {
     public String startTask(Model model, @PathVariable int id){
 
         Task task = taskDao.findOne(id);
-        LocalDateTime now = LocalDateTime.now();
         TaskSession session = new TaskSession();
-        session.setStart(now.toLocalTime());
-        session.setDate(now.toLocalDate());
-        session.setTask(task);
+        session.startClock(task);
         sessionDao.save(session);
+
         model.addAttribute("task", task);
         model.addAttribute("title", task.getName());
         model.addAttribute("taskSession", session);
+
+        return "task";
+    }
+
+    @RequestMapping(value="task/{taskId}/{sessionId}", method=RequestMethod.POST)
+    public String endTask(Model model, @PathVariable int taskId, @PathVariable int sessionId){
+        Task task = taskDao.findOne(taskId);
+        TaskSession session = sessionDao.findOne(sessionId);
+        session.stopClock();
+        sessionDao.save(session);
+
+        model.addAttribute("task", task);
+        model.addAttribute("title", task.getName());
 
         return "task";
     }
